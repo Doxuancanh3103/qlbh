@@ -4,6 +4,7 @@
     <MyNavigation></MyNavigation>
     <MyCarousel></MyCarousel>
     <TestComponent></TestComponent>
+    <Product width="300px" origin-price="32000" origin-percent="22"></Product>
     <MyFooter></MyFooter>
   </div>
 </template>
@@ -19,9 +20,11 @@ Vue.config.productionTip = false;
 Vue.use(Antd);
 import TestComponent from "./components/TestComponent";
 import MyNavigation from "./components/MyNavigation";
+import Product from "./components/Product";
 export default {
   name: 'App',
   components:{
+    Product,
     MyNavigation,
     TestComponent,
     MyCarousel,

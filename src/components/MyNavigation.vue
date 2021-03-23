@@ -13,28 +13,9 @@
           </a-menu-item>
         </a-menu>
         <div>
-          <img src="@/assets/menu.png" width="24px" height="24px"> Category
+          <img src="@/assets/menu.png" width="24px" height="24px" style="margin-bottom: 3px"> Category
         </div>
       </a-dropdown>
-<!--      <div>-->
-<!--        <h4>Category</h4>-->
-<!--      </div>-->
-<!--      <div class="drop-down">-->
-<!--        <ul>-->
-<!--          <li>-->
-<!--            <a>-->
-<!--              <img src="@/assets/s1.png">-->
-<!--              <span>Home</span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a>-->
-<!--              <img src="@/assets/s5.png">-->
-<!--              <span>Business book</span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
     </div>
     <div id="viewed">
       <div>

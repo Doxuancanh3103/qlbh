@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <Button>
-      Ant Button
-    </Button>
-    <DatePicker></DatePicker>
-  </div>
+
 </template>
 
 <script>

@@ -11,7 +11,7 @@
             <i class="fa fa-map-marker"></i> LK 02 - 03, Dãy B, KĐT Green Pearl,378 Minh Khai, Hai Bà Trưng, Hà Nội.
             <br>
             <br>
-            <i class="fa fa-phone"></i> 0979 985 361
+            <i class="fa fa-phone"></i> 0979 987 645
                                         contact@dxc.com
             <br>
             <br>
