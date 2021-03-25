@@ -1,7 +1,28 @@
 <template>
   <footer class="wrap">
     <div class="service-info">
-
+      <a-row type="flex" justify="center">
+        <a-col :span="4" :order="4" class="a-col">
+          <img src="@/assets/phone.png">
+          <h4>HOTLINE:</h4>
+          <p>0979 987 645</p>
+        </a-col>
+        <a-col :span="4" :order="3" class="a-col">
+          <img src="@/assets/smile.png">
+          <h4>FREE RETURNS</h4>
+          <p>within 10 days</p>
+        </a-col>
+        <a-col :span="4" :order="2" class="a-col">
+          <img src="@/assets/money.png">
+          <h4>SHIP COD WORLDWIDE</h4>
+          <p>Payment upon receipt of the book</p>
+        </a-col>
+        <a-col :span="4" :order="1" class="a-col">
+          <img src="@/assets/truck.png">
+          <h4>FREE SHIPPING</h4>
+          <p>for orders over 300,000 VND</p>
+        </a-col>
+      </a-row>
     </div>
     <div class="introduce">
       <div class="introduce-wrap">
@@ -61,7 +82,6 @@ export default {
 name: "MyFooter"
 }
 </script>
-
 <style scoped>
 .wrap{
   margin-top: 10px;
@@ -108,8 +128,28 @@ name: "MyFooter"
 .column > ul{
   list-style-type: none;
   text-align: left;
+  padding-left: 0;
 }
 ul li {
   margin-bottom: 5px;
+}
+.service-info > *{
+  height: 100%;
+}
+.a-col{
+  padding-top: 40px;
+}
+.a-col > * {
+  margin-bottom: 0;
+}
+.a-col > h4{
+  color: #026e36;
+}
+.a-col > p{
+  color: #666666;
+}
+.a-col > img{
+  width: 40px;
+  height: 40px;
 }
 </style>

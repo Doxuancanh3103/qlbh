@@ -21,7 +21,7 @@
     <img
       alt="example"
       src="@/assets/KhaNangTuDuy.jpg"
-      slot="cover"
+      slot="extra"
     />
     <div class="product-details">
       <a>Book: Khả năng tư duy</a>

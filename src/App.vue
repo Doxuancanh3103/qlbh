@@ -4,7 +4,10 @@
     <MyNavigation></MyNavigation>
     <MyCarousel></MyCarousel>
     <TestComponent></TestComponent>
-    <Product width="300px" origin-price="32000" origin-percent="22"></Product>
+    <ListProductHorizontal class="list-product-horizontal" title="NEWLY RELEASED BOOK"></ListProductHorizontal>
+    <ListProductHorizontal class="list-product-horizontal" title="TOP 100 BEST SELLER"></ListProductHorizontal>
+    <ListProductHorizontal class="list-product-horizontal" title="SKILLING BOOK"></ListProductHorizontal>
+
     <MyFooter></MyFooter>
   </div>
 </template>
@@ -21,9 +24,11 @@ Vue.use(Antd);
 import TestComponent from "./components/TestComponent";
 import MyNavigation from "./components/MyNavigation";
 import Product from "./components/Product";
+import ListProductHorizontal from "./components/ListProductHorizontal";
 export default {
   name: 'App',
   components:{
+    ListProductHorizontal,
     Product,
     MyNavigation,
     TestComponent,
@@ -41,6 +46,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #f4f4f4;
 }
 
 #header{
@@ -49,5 +55,8 @@ export default {
   height: 100px;
   background-color: white;
   text-align-all: center;
+}
+#list-product-horizontal{
+  margin-top: 30px;
 }
 </style>
