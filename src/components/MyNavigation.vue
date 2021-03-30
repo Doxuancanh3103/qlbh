@@ -2,12 +2,12 @@
   <div class="navigation">
     <div class="down-menu">
       <a-dropdown>
-        <a-menu slot="overlay" @click="handleMenuClick">
-          <a-menu-item key="1">
+        <a-menu slot="overlay" >
+          <a-menu-item key="1" @click="redirectHome">
             <img src="@/assets/s1.png">
             <span>Home</span>
           </a-menu-item>
-          <a-menu-item key="2">
+          <a-menu-item key="2" @click="redirectBusinessBook">
             <img src="@/assets/s5.png">
             <span>Business book</span>
           </a-menu-item>
@@ -49,7 +49,13 @@ export default {
   name: "MyNavigation",
   methods:{
     handleMenuClick(e){
-      console.log(e)
+      // console.log(e)
+    },
+    redirectHome(){
+      this.$router.push("/").catch(()=>{});
+    },
+    redirectBusinessBook(){
+      console.log("Business Book");
     }
   }
 

@@ -20,14 +20,17 @@
     </template>
     <img
       alt="example"
-      src="@/assets/KhaNangTuDuy.jpg"
+      :src="resolve_img_url(imageSource)"
       slot="extra"
+      width="200px"
+      height="300px"
+      style="object-fit: cover"
     />
     <div class="product-details">
-      <a>Book: Khả năng tư duy</a>
+      <a :style="autoFontSize">{{displayNameBook}}</a>
       <p style="color:black">
         <del style="color: #D4D4D4">{{formatMoney(this.originPrice)}}</del>
-        <span>{{formatMoney(this.getCurrentPrice())}}</span>
+        <span style="color: #046d35">{{formatMoney(this.getCurrentPrice())}}</span>
         <span style="background-color: red;color: white">{{originPercent}}%</span>
       </p>
     </div>
@@ -42,13 +45,15 @@ export default {
       styleObject:{
         width:this.width
       },
-      text:"asdsgfasdf"
+      displayNameBook:''
     }
   },
   props:{
     width:String,
-    originPrice:String,
-    originPercent:String
+    originPrice:Number,
+    originPercent:Number,
+    imageSource:String,
+    nameOfBook:String
   },
   methods:{
     formatMoney(price){
@@ -60,6 +65,20 @@ export default {
     },
     getCurrentPrice(){
       return this.originPrice-this.originPrice*this.originPercent/100;
+    },
+    resolve_img_url: function (path) {
+      let images = require.context('../assets/', false, /\.png$|\.jpg$/)
+      return images("./"+path)
+    }
+  },
+  computed:{
+    autoFontSize(){
+      console.log(this.nameOfBook.split().length);
+      if (this.nameOfBook.split(' ').length >= 7){
+        this.displayNameBook = this.nameOfBook.split(' ').slice(0,5).join(" ") +'...';
+      }else{
+        this.displayNameBook = this.nameOfBook;
+      }
     }
   }
 }
@@ -75,7 +94,12 @@ export default {
 }
 .product-details > a{
   color: black;
+  font-size: 15px;
   width: 100%;
+  transition: all 0.15s ease-in;
+}
+.product-details > a:hover{
+  color: #026e36;
 }
 .product-details > p{
   margin-top: 10px;

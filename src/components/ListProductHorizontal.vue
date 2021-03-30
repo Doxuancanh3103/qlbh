@@ -4,16 +4,25 @@
       <h2>{{title }}</h2>
     </div>
     <div id="list-product">
-      <carousel class="my-carousel" :items = this.numberImageInList autoHeight="true">
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-        <Product origin-price="32000" origin-percent="20" width="300"></Product>
-      </carousel>
+      <div v-if="!isEmpty()">
+        <div v-if="loading == false">
+          <carousel class="my-carousel" :items = this.numberImageInList autoHeight="true">
+            <Product v-for="i in 10"
+                     :key="i"
+                     :image-source="listBooks[i].imageBook"
+                     width="98%"
+                     :name-of-book="listBooks[i].name"
+                     :origin-price="listBooks[i].price"
+                     :origin-percent="listBooks[i].discount">
+            </Product>
+          </carousel>
+        </div>
+        <div v-else>
+          <div>
+            <a-spin />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,11 +30,17 @@
 <script>
 import carousel from 'vue-owl-carousel'
 import Product from "./Product";
+import axios from 'axios'
 export default {
   name: "ListProductHorizontal",
+  mounted () {
+      this.getListBookByType(this.typeBook);
+  },
   data(){
     return{
-      numberImageInList:5
+      numberImageInList:4,
+      listBooks:null,
+      loading:true,
     }
   },
   components:{
@@ -33,7 +48,23 @@ export default {
     carousel
   },
   props:{
-    title:String
+    title:String,
+    typeBook:String
+  },
+  methods: {
+    getListBookByType (type) {
+      console.log("a");
+      axios
+        .get('http://localhost:9889/book-controller/get-list-book-by-type?type='+type)
+        .then(response => {
+          this.listBooks = response.data
+        })
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false)
+    },
+    isEmpty(){
+      return this.listBooks == 0;
+    }
   }
 }
 </script>
@@ -50,6 +81,8 @@ div{
 }
 .my-carousel > Product{
   height: 100%;
+  margin-right: 10px;
+  width: 25%;
 }
 #title>h2{
   text-align: left;
@@ -73,6 +106,9 @@ div{
   height: 15%;
 }
 #list-product{
+  width: 100%;
+}
+#list-product > div{
   width: 100%;
 }
 #list-product-horizontal{

@@ -2,12 +2,7 @@
   <div id="app">
     <MyHeader id="header"></MyHeader>
     <MyNavigation></MyNavigation>
-    <MyCarousel></MyCarousel>
-    <TestComponent></TestComponent>
-    <ListProductHorizontal class="list-product-horizontal" title="NEWLY RELEASED BOOK"></ListProductHorizontal>
-    <ListProductHorizontal class="list-product-horizontal" title="TOP 100 BEST SELLER"></ListProductHorizontal>
-    <ListProductHorizontal class="list-product-horizontal" title="SKILLING BOOK"></ListProductHorizontal>
-
+    <Main></Main>
     <MyFooter></MyFooter>
   </div>
 </template>
@@ -15,24 +10,19 @@
 import MyFooter from "./components/MyFooter";
 import Vue from 'vue';
 import Antd from 'ant-design-vue';
-import MyCarousel from "./components/MyCarousel";
 import 'ant-design-vue/dist/antd.css';
 import MyHeader from "./components/MyHeader";
 Vue.config.productionTip = false;
 
 Vue.use(Antd);
-import TestComponent from "./components/TestComponent";
 import MyNavigation from "./components/MyNavigation";
-import Product from "./components/Product";
-import ListProductHorizontal from "./components/ListProductHorizontal";
+import Main from "./components/Main";
+;
 export default {
   name: 'App',
   components:{
-    ListProductHorizontal,
-    Product,
+    Main,
     MyNavigation,
-    TestComponent,
-    MyCarousel,
     MyHeader,
     MyFooter
   }

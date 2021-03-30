@@ -1,10 +1,19 @@
 <template>
   <div class="header-select">
     <div id="home">
-      <img src="//theme.hstatic.net/1000237375/1000304269/14/logo.png?v=3399" width="300px" height="60px">
+      <a href="/">
+        <img src="//theme.hstatic.net/1000237375/1000304269/14/logo.png?v=3399" width="300px" height="60px">
+      </a>
     </div>
     <div id="search">
-      <input type="text" placeholder="Search...">
+      <a-auto-complete
+        v-model="value"
+        style="width: 80%"
+        :data-source="listProducts"
+        @select="onSelect"
+        @search="onSearch"
+        @change="onChange"
+      />
       <input type="button" value="Search">
     </div>
     <div id="cart">
@@ -14,8 +23,39 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
-name: "MyHeader"
+  name: "MyHeader",
+  data(){
+    return{
+      listProducts:[],
+      value:''
+    }
+  },
+  watch: {
+    value(val) {
+      console.log('value', val);
+    },
+  },
+  methods:{
+    onSearch(searchText) {
+      let list = []
+      axios
+        .get('http://localhost:9889/book-controller/get-list-book-by-name?name='+searchText)
+        .then(response => {
+          response.data.forEach(x => list.push(x.name));
+        })
+        .catch(error => console.log(error))
+      this.listProducts = list;
+    },
+    onSelect(value) {
+      console.log('onSelect', value);
+    },
+    onChange(value) {
+      console.log('onChange', value);
+    },
+  }
 }
 </script>
 
@@ -39,24 +79,11 @@ name: "MyHeader"
   justify-content: center;
   align-items: center;
 }
-#search input[type="text"]{
-  border: 1px solid #42b983;
-  height: 40px;
-  width: 80%;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  padding-left: 30px;
-}
-#search input[type="text"]:focus{
-  border: 1px solid #42b983;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  outline: none;
-}
 #search input[type="button"]{
   color: white;
   background-color: forestgreen;
   border: none;
-  height: 40px;
+  height: 32px;
   width: 20%;
 }
 #search input[type="button"]:hover{

@@ -13,8 +13,10 @@
     "@ant-design/icons": "^4.6.2",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "ant-design-vue": "^1.7.4",
+    "axios": "^0.21.1",
     "ui-vue-antd": "^1.0.6",
     "vue": "^2.5.2",
+    "vue-axios": "^3.2.4",
     "vue-owl-carousel": "^2.0.3",
     "vue-router": "^3.0.1"
   },

@@ -14,10 +14,6 @@
     >
       <a-icon type="right-circle" />
     </div>
-<!--    <div><h3>1</h3></div>-->
-<!--    <div><h3>2</h3></div>-->
-<!--    <div><h3>3</h3></div>-->
-<!--    <div><h3>4</h3></div>-->
     <div v-for="slide in listBanners">
       <img v-bind:src="slide" v-bind:key="slide">
     </div>
