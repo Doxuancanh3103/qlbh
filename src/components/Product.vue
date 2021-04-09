@@ -3,6 +3,7 @@
     hoverable
     v-bind:style="styleObject"
     class="wrapper-card"
+    @click="goToBookDetailsByID"
   >
     <template slot="actions" class="ant-card-actions">
       <template>
@@ -14,7 +15,7 @@
       <template>
         <a-tooltip placement="top">
           <template slot="title">Add to Cart</template>
-          <a-icon type="shopping-cart" />
+          <a-icon type="shopping-cart" @click.stop="addToCart"/>
         </a-tooltip>
       </template>
     </template>
@@ -53,7 +54,8 @@ export default {
     originPrice:Number,
     originPercent:Number,
     imageSource:String,
-    nameOfBook:String
+    nameOfBook:String,
+    bookId:String
   },
   methods:{
     formatMoney(price){
@@ -69,6 +71,14 @@ export default {
     resolve_img_url: function (path) {
       let images = require.context('../assets/', false, /\.png$|\.jpg$/)
       return images("./"+path)
+    },
+    goToBookDetailsByID(){
+      let path = '/book-details-by-id/'+this.bookId;
+      console.log(path);
+      this.$router.push(path).catch(() => {});
+    },
+    addToCart(){
+      this.$router.push('/cart').catch(() => {})
     }
   },
   computed:{

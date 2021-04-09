@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from "../components/Home";
 import MyHeader from "../components/MyHeader";
+import BookDetails from "../components/BookDetails";
+import Cart from "../components/Cart"
+import BookDetailsByID from "../components/BookDetailsByID";
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +18,21 @@ export default new Router({
       path: '/header',
       name: 'Header',
       component: MyHeader
+    },
+    {
+      path:'/book-details/:bookName',
+      name:'bookDetails',
+      component: BookDetails
+    },
+    {
+      path:'/book-details-by-id/:bookId',
+      name:'bookDetailsById',
+      component: BookDetailsByID
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart
     }
   ]
 })

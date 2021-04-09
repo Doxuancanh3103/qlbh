@@ -14,11 +14,11 @@
         @search="onSearch"
         @change="onChange"
       />
-      <input type="button" value="Search">
+      <input type="button" value="Search" @click="goToBookDetails">
     </div>
-    <div id="cart">
-      <img src="@/assets/cart.png" width="30px" height="30px">
-      <p>Cart</p>
+    <div id="cart" style="margin-top: 20px;cursor: pointer">
+      <a-icon type="shopping-cart" style="font-size: 30px;opacity: 0.5" @click="redirectCart"/>
+      <p style="font-size: 10px">Cart</p>
     </div>
   </div>
 </template>
@@ -50,11 +50,20 @@ export default {
       this.listProducts = list;
     },
     onSelect(value) {
-      console.log('onSelect', value);
+      return value;
     },
     onChange(value) {
       console.log('onChange', value);
     },
+    goToBookDetails(){
+      console.log(this.onSelect(this.value));
+      let path = '/book-details/'+this.onSelect(this.value);
+      console.log(path);
+      this.$router.push(path).catch(() => {});
+    },
+    redirectCart(){
+      this.$router.push('/cart').catch(() => {})
+    }
   }
 }
 </script>

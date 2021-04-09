@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom: 10px">
     <MyCarousel></MyCarousel>
     <ListProductHorizontal title="BUSINESS BOOK" type-book="Business"></ListProductHorizontal>
     <ListProductHorizontal title="LITERATURE" type-book="Literature"></ListProductHorizontal>

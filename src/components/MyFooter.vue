@@ -84,7 +84,7 @@ name: "MyFooter"
 </script>
 <style scoped>
 .wrap{
-  margin-top: 10px;
+  margin-top: 0;
   width: 100%;
   height: 500px;
   color: white;

@@ -8,7 +8,8 @@
         <div v-if="loading == false">
           <carousel class="my-carousel" :items = this.numberImageInList autoHeight="true">
             <Product v-for="i in 10"
-                     :key="i"
+                     :key="listBooks[i].isbn"
+                     :book-id="listBooks[i].isbn"
                      :image-source="listBooks[i].imageBook"
                      width="98%"
                      :name-of-book="listBooks[i].name"
@@ -64,7 +65,7 @@ export default {
     },
     isEmpty(){
       return this.listBooks == 0;
-    }
+    },
   }
 }
 </script>
