@@ -56,7 +56,19 @@
             </div>
           </div>
           <div style="margin-top: 20px;height: 40px">
-            <AButton style="height: 100%;width: 30%;border-radius: 20px;text-align:center;color:green;border: 1px solid green" @click="addToCart">ADD TO CART</AButton>
+            <div id="components-modal-demo-position">
+              <AButton style="height: 100%;width: 30%;border-radius: 20px;text-align:center;color:green;border: 1px solid green" @click="addToCart">ADD TO CART</AButton>
+              <a-modal
+                title="CART"
+                :dialog-style="{ top: '20px' }"
+                :visible="modal1Visible"
+                :width="1200"
+                @ok="() => setModal1Visible(false)"
+                @cancel="() => setModal1Visible(false)"
+              >
+                <Cart></Cart>
+              </a-modal>
+            </div>
           </div>
           <div style="margin-top: 15px" id="more-info">
             <h4 style="opacity: 0.7;"><strong>Service & Discount</strong></h4>
@@ -84,14 +96,18 @@
 
 <script>
 import axios from 'axios'
+import CartModal from "./CartModal";
+import Cart from "./Cart";
 export default {
   name: "BookDetails",
+  components: {Cart, CartModal},
   data(){
     return {
       currentBook:null,
       // filter: {},
       amount:1,
-      loading:true
+      loading:true,
+      modal1Visible: false,
     }
   },
   computed:{
@@ -110,6 +126,9 @@ export default {
     this.getBookByName()
   },
   methods:{
+    setModal1Visible(modal1Visible) {
+      this.modal1Visible = modal1Visible;
+    },
     getBookByName(){
       const configs = {params: {...this.filter}}
       axios
@@ -170,6 +189,7 @@ export default {
         }
         localStorage.setItem("listProduct",JSON.stringify(listProduct))
       }
+      this.setModal1Visible(true)
       console.log(JSON.parse(localStorage.getItem("listProduct")))
     }
   }

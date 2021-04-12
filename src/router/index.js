@@ -5,6 +5,7 @@ import MyHeader from "../components/MyHeader";
 import BookDetails from "../components/BookDetails";
 import Cart from "../components/Cart"
 import BookDetailsByID from "../components/BookDetailsByID";
+import CheckOuts from "../components/CheckOuts";
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +34,11 @@ export default new Router({
       path: '/cart',
       name: 'cart',
       component: Cart
+    },
+    {
+      path:'/checkouts',
+      name:'checkouts',
+      component: CheckOuts
     }
   ]
 })

@@ -1,6 +1,7 @@
 <template>
   <div v-if="loading===false" style="background-color: white;width: 80%;margin-right: auto;margin-left: auto;margin-bottom: 20px;margin-top: 20px">
-    <a-table :columns="columns" :data-source="data">
+    <a-table :columns="columns" :data-source="dataSource"
+             :scroll="{ x: 'calc(400px + 30%)', y: 350 }">
       <span slot="Image" slot-scope="Image">
         <a-card
           hoverable
@@ -19,12 +20,29 @@
       <a slot="Product" slot-scope="Product" style="color: green">{{Product}}</a>
       <span slot="Product"> Name</span>
       <span slot="Price" slot-scope="Price">{{formatMoney(Price)}}</span>
-      <span slot="Total" slot-scope="Total">{{formatMoney(Total)}}</span>
-      <span slot="Delete" slot-scope="Delete">
-        <AButton style="border: 1px solid red;color: red">{{Delete}}</AButton>
+      <span slot="Quantity" slot-scope="Quantity,record">
+        <div id="wrap-compute">
+          <AButton style="font-size: 20px" @click="minus(record.key)">-</AButton>
+          <div style="font-size: 20px;margin-left: 10px;margin-right: 10px">{{Quantity}}</div>
+          <AButton style="font-size: 20px" @click="plus(record.key)">+</AButton>
+        </div>
       </span>
+      <span slot="Total" slot-scope="Total">{{formatMoney(Total)}}</span>
+<!--      <span slot="Delete" slot-scope="Delete,record">-->
+<!--        <AButton style="border: 1px solid red;color: red" @click="deleteRecord(record.key)">{{Delete}}</AButton>-->
+<!--      </span>-->
+      <template slot="Delete" slot-scope="Delete, record">
+        <a-popconfirm
+          v-if="dataSource.length"
+          title="Sure to delete?"
+          @confirm="() => deleteRecord(record.key)"
+        >
+          <AButton style="border: 1px solid red;color: red">{{Delete}}</AButton>
+        </a-popconfirm>
+      </template>
     </a-table>
-    <p style="font-size: 25px;color: green">Total: {{formatMoney(getTotal().Total)}}</p>
+    <p style="font-size: 25px;color: green">Total: {{formatMoney(getTotal())}}</p>
+    <AButton style="width: 150px;border-radius: 100px;margin-bottom: 10px;border: 1px solid green;color: green;font-size: 20px">Pay</AButton>
   </div>
 </template>
 
@@ -70,39 +88,30 @@ const columns = [
   },
 ];
 
-const data = [];
+const dataSource = [];
 export default {
   name: "Cart",
   data(){
     return {
-      data,
+      dataSource,
       columns,
-      loading:true
+      loading:true,
     }
   },
   mounted() {
     this.getProductsInCart()
   },
   methods:{
-    getTotal(){
-      return this.data.length > 0 ? this.data.reduce((a,b) => {
-        return {
-          Total: a.Total + b.Total
-        }
-      }) : {
-        Total:0
-      }
-    },
     getProductsInCart(){
       let arr = this.convertStringToArray()
       try{
-        this.data = []
+        this.dataSource = []
         for (let x of arr){
           axios
             .get("http://localhost:9889/book-controller/get-book-by-id?bookId="+x[0])
             .then(response => {
               let myData = response.data
-              this.data.push({
+              this.dataSource.push({
                 key:myData.isbn,
                 Product:myData.name,
                 Price:myData.price-myData.price*myData.discount/100,
@@ -134,11 +143,65 @@ export default {
         currency: 'VND',
       });
       return formatter.format(Number(price));
+    },
+    deleteRecord(key){
+      console.log(key)
+      let arr = this.convertStringToArray()
+      let newArr = arr.filter(x => x[0] !== key)
+      localStorage.setItem("listProduct",JSON.stringify(newArr))
+      const dataSource = [...this.dataSource];
+      this.dataSource = dataSource.filter(item => item.key !== key);
+    },
+    plus(key){
+      this.dataSource.forEach(item => {
+        if(item.key === key) {
+          item.Quantity += 1
+          item.Total += item.Price
+          let arr = this.convertStringToArray()
+          arr.map(ele => {
+            if (ele[0] === key){
+              ele[1] = item.Quantity
+            }
+          })
+          localStorage.setItem("listProduct",JSON.stringify(arr))
+        }
+      })
+    },
+    minus(key){
+      this.dataSource.forEach(item => {
+        if(item.key === key) {
+          item.Quantity -= 1
+          item.Total -= item.Price
+          if (item.Quantity === 0){
+            this.deleteRecord(key)
+          }else{
+            let arr = this.convertStringToArray()
+            arr.map(ele => {
+              if (ele[0] === key){
+                ele[1] = item.Quantity
+              }
+            })
+            localStorage.setItem("listProduct",JSON.stringify(arr))
+          }
+        }
+      })
+    },
+    getTotal(){
+      let result = 0;
+      this.dataSource.forEach(item => result+=item.Total)
+      return result
+    },
+    pay(){
+
     }
   }
 }
 </script>
 
 <style scoped>
-
+#wrap-compute{
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
 </style>

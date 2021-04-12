@@ -6,7 +6,7 @@
         <li style="opacity: 0.5">/</li>
         <li>ALL PRODUCTS</li>
         <li style="opacity: 0.5">/</li>
-        <li style="opacity: 0.5">Book: {{$route.params.bookName}}</li>
+        <li style="opacity: 0.5">Book: {{currentBook.name}}</li>
       </ul>
     </div>
     <div id="details">
@@ -17,7 +17,7 @@
         >
           <img
             alt="example"
-            :src="resolve_img_url(this.currentBook.imageBook)"
+            :src="resolve_img_url(currentBook.imageBook)"
             slot="extra"
             width="100%"
             style="object-fit: cover"
@@ -25,16 +25,16 @@
         </a-card>
       </div>
       <div id="info-book">
-        <h3><strong>BOOK: {{this.currentBook.name.toUpperCase()}}</strong></h3>
-        <div><strong>Code of product:</strong> <span><i>{{this.currentBook.isbn}}</i></span></div>
+        <h3><strong>BOOK: {{currentBook.name.toUpperCase()}}</strong></h3>
+        <div><strong>Code of product:</strong> <span><i>{{currentBook.isbn}}</i></span></div>
         <br>
         <div id="basic-info">
-          <p>Author: {{this.currentBook.author}}</p>
-          <p>Publisher: {{this.currentBook.publish}}</p>
-          <p>Demension: {{this.currentBook.width}}x{{this.currentBook.height}}cm</p>
-          <p>Page number: {{this.currentBook.pageNumber}}</p>
-          <p>Mass: {{this.currentBook.mass}} grams</p>
-          <p>Type: {{this.currentBook.type}}</p>
+          <p>Author: {{currentBook.author}}</p>
+          <p>Publisher: {{currentBook.publish}}</p>
+          <p>Demension: {{currentBook.width}}x{{this.currentBook.height}}cm</p>
+          <p>Page number: {{currentBook.pageNumber}}</p>
+          <p>Mass: {{currentBook.mass}} grams</p>
+          <p>Type: {{currentBook.type}}</p>
           <div id="row">
             <div>
               <h2 style="color: #026e36;font-size: 25px"><strong>{{this.formatMoney(this.getCurrentPrice())}}</strong></h2>
@@ -56,7 +56,19 @@
             </div>
           </div>
           <div style="margin-top: 20px;height: 40px">
-            <AButton style="height: 100%;width: 30%;border-radius: 20px;text-align:center;color:green;border: 1px solid green" @click="addToCart">ADD TO CART</AButton>
+            <div id="components-modal-demo-position">
+              <AButton style="height: 100%;width: 30%;border-radius: 20px;text-align:center;color:green;border: 1px solid green" @click="addToCart">ADD TO CART</AButton>
+              <a-modal
+                title="CART"
+                :dialog-style="{ top: '20px' }"
+                :visible="modal1Visible"
+                :width="1200"
+                @ok="() => setModal1Visible(false)"
+                @cancel="() => setModal1Visible(false)"
+              >
+                <Cart></Cart>
+              </a-modal>
+            </div>
           </div>
           <div style="margin-top: 15px" id="more-info">
             <h4 style="opacity: 0.7;"><strong>Service & Discount</strong></h4>
@@ -84,6 +96,7 @@
 
 <script>
 import axios from 'axios'
+import Cart from "./Cart";
 export default {
   name: "BookDetailsByID",
   data(){
@@ -91,8 +104,12 @@ export default {
       currentBook:null,
       // filter: {},
       amount:1,
-      loading:true
+      loading:true,
+      modal1Visible: false,
     }
+  },
+  components:{
+    Cart
   },
   computed:{
 
@@ -132,6 +149,9 @@ export default {
       let images = require.context('../assets/', false, /\.png$|\.jpg$/)
       return images("./"+path)
     },
+    setModal1Visible(modal1Visible) {
+      this.modal1Visible = modal1Visible;
+    },
     addToCart(){
       if (localStorage.getItem("listProduct") === null){
         let arr = []
@@ -151,6 +171,7 @@ export default {
         }
         localStorage.setItem("listProduct",JSON.stringify(listProduct))
       }
+      this.setModal1Visible(true)
       console.log(JSON.parse(localStorage.getItem("listProduct")))
     }
   }

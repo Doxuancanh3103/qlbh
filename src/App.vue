@@ -4,6 +4,7 @@
     <MyNavigation></MyNavigation>
     <Main></Main>
     <MyFooter></MyFooter>
+<!--    <CheckOut></CheckOut>-->
   </div>
 </template>
 <script>
@@ -17,10 +18,14 @@ Vue.config.productionTip = false;
 Vue.use(Antd);
 import MyNavigation from "./components/MyNavigation";
 import Main from "./components/Main";
+import CartModal from "./components/CartModal";
+import CheckOut from "./components/CheckOuts";
 ;
 export default {
   name: 'App',
   components:{
+    CheckOut,
+    CartModal,
     Main,
     MyNavigation,
     MyHeader,
