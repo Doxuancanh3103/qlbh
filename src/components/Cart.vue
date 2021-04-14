@@ -1,7 +1,7 @@
 <template>
-  <div v-if="loading===false" style="background-color: white;width: 80%;margin-right: auto;margin-left: auto;margin-bottom: 20px;margin-top: 20px">
-    <a-table :columns="columns" :data-source="dataSource"
-             :scroll="{ x: 'calc(400px + 30%)', y: 350 }">
+    <div v-if="loading===false" style="background-color: white;width: 80%;margin-right: auto;margin-left: auto;margin-bottom: 20px;margin-top: 20px">
+      <a-table :columns="columns" :data-source="dataSource"
+               :scroll="{ x: 'calc(400px + 30%)', y: 330 }">
       <span slot="Image" slot-scope="Image">
         <a-card
           hoverable
@@ -17,37 +17,38 @@
           />
         </a-card>
       </span>
-      <a slot="Product" slot-scope="Product" style="color: green">{{Product}}</a>
-      <span slot="Product"> Name</span>
-      <span slot="Price" slot-scope="Price">{{formatMoney(Price)}}</span>
-      <span slot="Quantity" slot-scope="Quantity,record">
+        <a slot="Product" slot-scope="Product" style="color: green">{{Product}}</a>
+        <span slot="Product"> Name</span>
+        <span slot="Price" slot-scope="Price">{{formatMoney(Price)}}</span>
+        <span slot="Quantity" slot-scope="Quantity,record">
         <div id="wrap-compute">
           <AButton style="font-size: 20px" @click="minus(record.key)">-</AButton>
           <div style="font-size: 20px;margin-left: 10px;margin-right: 10px">{{Quantity}}</div>
           <AButton style="font-size: 20px" @click="plus(record.key)">+</AButton>
         </div>
       </span>
-      <span slot="Total" slot-scope="Total">{{formatMoney(Total)}}</span>
-<!--      <span slot="Delete" slot-scope="Delete,record">-->
-<!--        <AButton style="border: 1px solid red;color: red" @click="deleteRecord(record.key)">{{Delete}}</AButton>-->
-<!--      </span>-->
-      <template slot="Delete" slot-scope="Delete, record">
-        <a-popconfirm
-          v-if="dataSource.length"
-          title="Sure to delete?"
-          @confirm="() => deleteRecord(record.key)"
-        >
-          <AButton style="border: 1px solid red;color: red">{{Delete}}</AButton>
-        </a-popconfirm>
-      </template>
-    </a-table>
-    <p style="font-size: 25px;color: green">Total: {{formatMoney(getTotal())}}</p>
-    <AButton style="width: 150px;border-radius: 100px;margin-bottom: 10px;border: 1px solid green;color: green;font-size: 20px">Pay</AButton>
-  </div>
+        <span slot="Total" slot-scope="Total">{{formatMoney(Total)}}</span>
+        <!--      <span slot="Delete" slot-scope="Delete,record">-->
+        <!--        <AButton style="border: 1px solid red;color: red" @click="deleteRecord(record.key)">{{Delete}}</AButton>-->
+        <!--      </span>-->
+        <template slot="Delete" slot-scope="Delete, record">
+          <a-popconfirm
+            v-if="dataSource.length"
+            title="Sure to delete?"
+            @confirm="() => deleteRecord(record.key)"
+          >
+            <AButton style="border: 1px solid red;color: red">{{Delete}}</AButton>
+          </a-popconfirm>
+        </template>
+      </a-table>
+      <p style="font-size: 25px;color: green">Total: {{formatMoney(getTotal())}}</p>
+      <AButton style="width: 150px;border-radius: 100px;margin-bottom: 10px;border: 1px solid green;color: green;font-size: 20px" @click="pay">Pay</AButton>
+    </div>
 </template>
 
 <script>
 import axios from "axios";
+import MainLayouts from "../pages/layouts/MainLayouts";
 
 const columns = [
   {
@@ -90,7 +91,8 @@ const columns = [
 
 const dataSource = [];
 export default {
-  name: "Cart",
+  name: "CommonCart",
+  components: {MainLayouts},
   data(){
     return {
       dataSource,
@@ -192,7 +194,8 @@ export default {
       return result
     },
     pay(){
-
+      console.log('12432')
+      this.$router.push({path: '/checkouts'})
     }
   }
 }

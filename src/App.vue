@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <MyHeader id="header"></MyHeader>
-    <MyNavigation></MyNavigation>
-    <Main></Main>
-    <MyFooter></MyFooter>
-<!--    <CheckOut></CheckOut>-->
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -30,7 +26,14 @@ export default {
     MyNavigation,
     MyHeader,
     MyFooter
-  }
+  },
+  data () {
+    return {
+      data: {
+
+      }
+    }
+  },
 }
 </script>
 
@@ -44,14 +47,14 @@ export default {
   background-color: #f4f4f4;
 }
 
-#header{
-  margin: 0;
-  padding: 0;
-  height: 100px;
-  background-color: white;
-  text-align-all: center;
-}
-#list-product-horizontal{
-  margin-top: 30px;
-}
+/*#header{*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  height: 100px;*/
+/*  background-color: white;*/
+/*  text-align-all: center;*/
+/*}*/
+/*#list-product-horizontal{*/
+/*  margin-top: 30px;*/
+/*}*/
 </style>

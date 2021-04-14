@@ -1,4 +1,5 @@
 <template>
+  <MainLayouts>
   <div id="book-details" v-if="loading==false">
     <div id="title">
       <ul>
@@ -92,11 +93,13 @@
       </div>
     </div>
   </div>
+</MainLayouts>
 </template>
 
 <script>
 import axios from 'axios'
 import Cart from "./Cart";
+import MainLayouts from "../pages/layouts/MainLayouts";
 export default {
   name: "BookDetailsByID",
   data(){
@@ -109,6 +112,7 @@ export default {
     }
   },
   components:{
+    MainLayouts,
     Cart
   },
   computed:{

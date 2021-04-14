@@ -16,6 +16,16 @@
         <a-tooltip placement="top">
           <template slot="title">Add to Cart</template>
           <a-icon type="shopping-cart" @click.stop="addToCart"/>
+          <a-modal
+            title="CART"
+            :dialog-style="{ top: '20px' }"
+            :visible="modal1Visible"
+            :width="1200"
+            @ok="() => setModal1Visible(false)"
+            @cancel="() => setModal1Visible(false)"
+          >
+            <Cart></Cart>
+          </a-modal>
         </a-tooltip>
       </template>
     </template>
@@ -39,14 +49,17 @@
 </template>
 
 <script>
+import Cart from "./Cart";
 export default {
   name: "Product",
+  components: {Cart},
   data(){
     return{
       styleObject:{
         width:this.width
       },
-      displayNameBook:''
+      displayNameBook:'',
+      modal1Visible: false,
     }
   },
   props:{
@@ -77,8 +90,30 @@ export default {
       console.log(path);
       this.$router.push(path).catch(() => {});
     },
+    setModal1Visible(modal1Visible) {
+      this.modal1Visible = modal1Visible;
+    },
     addToCart(){
-      this.$router.push('/cart').catch(() => {})
+      if (localStorage.getItem("listProduct") === null){
+        let arr = []
+        arr.push(
+          [
+            this.bookId,1
+          ]
+        )
+        localStorage.setItem("listProduct",JSON.stringify(arr))
+      }else{
+        let listProduct = JSON.parse(localStorage.getItem("listProduct"))
+        if (listProduct.map(x => x[0]).includes(this.bookId)){
+          console.log(listProduct.filter(x => x[0] === this.bookId))
+          listProduct.filter(x => x[0] === this.bookId)[0][1] += 1
+        }else{
+          listProduct.push([this.bookId,1])
+        }
+        localStorage.setItem("listProduct",JSON.stringify(listProduct))
+      }
+      this.setModal1Visible(true)
+      console.log(JSON.parse(localStorage.getItem("listProduct")))
     }
   },
   computed:{

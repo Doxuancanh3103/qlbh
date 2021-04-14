@@ -3,22 +3,29 @@ import Router from 'vue-router'
 import Home from "../components/Home";
 import MyHeader from "../components/MyHeader";
 import BookDetails from "../components/BookDetails";
-import Cart from "../components/Cart"
+import Cart from "../components/BigCart"
 import BookDetailsByID from "../components/BookDetailsByID";
 import CheckOuts from "../components/CheckOuts";
+import MainLayouts from "../pages/layouts/MainLayouts";
+import BigCart from "../components/BigCart";
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Home',
-      component: Home
+      path:'/',
+      name:'Home',
+      component:Home
     },
     {
-      path: '/header',
-      name: 'Header',
-      component: MyHeader
+      path: '/checkouts',
+      name:'Checkouts',
+      component: CheckOuts
+    },
+    {
+      path:'/cart',
+      name: 'BigCart',
+      component: BigCart
     },
     {
       path:'/book-details/:bookName',
@@ -30,15 +37,5 @@ export default new Router({
       name:'bookDetailsById',
       component: BookDetailsByID
     },
-    {
-      path: '/cart',
-      name: 'cart',
-      component: Cart
-    },
-    {
-      path:'/checkouts',
-      name:'checkouts',
-      component: CheckOuts
-    }
   ]
 })

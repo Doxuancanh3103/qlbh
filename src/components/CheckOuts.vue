@@ -1,16 +1,14 @@
 <template>
+  <div style="width: 100%;background-color: white">
   <div id="wrapper-checkout">
     <div id="info">
       <div id="main">
         <div id="info-header">
           <h2 style="text-align: left">XUAN CANH BOOK</h2>
           <ul style="display: flex;justify-content: left;list-style-type: none">
+            <li style="color: #D4D4D4"> < </li>
             <li>
-              <a>Cart</a>
-            </li>
-            <li style="color: #D4D4D4"> > </li>
-            <li>
-              <a>Shipment details</a>
+              <router-link to="/cart">Cart</router-link>
             </li>
           </ul>
         </div>
@@ -29,95 +27,95 @@
           </div>
           <a-input placeholder="Address" style="margin-top: 10px" v-model="address"></a-input>
           <div style="margin-top: 10px;display: flex;justify-content: space-between">
-            <a-select v-model="city" default-value="Chọn tỉnh / thành" id="customer_shipping_province" name="customer_shipping_province" style="width: 45%">
+            <a-select default-value="Chọn tỉnh / thành" style="width: 45%" @change="handleChangeCity">
               <a-select-option value="null">  Chọn tỉnh / thành </a-select-option>
-              <a-select-option value="50">Hồ Chí Minh</a-select-option>
-              <a-select-option value="1">Hà Nội</a-select-option>
-              <a-select-option value="32">Đà Nẵng</a-select-option>
-              <a-select-option value="57" selected="">An Giang</a-select-option>
-              <a-select-option value="49">Bà Rịa - Vũng Tàu</a-select-option>
-              <a-select-option value="15">Bắc Giang</a-select-option>
-              <a-select-option value="4">Bắc Kạn</a-select-option>
-              <a-select-option value="62">Bạc Liêu</a-select-option>
-              <a-select-option value="18">Bắc Ninh</a-select-option>
-              <a-select-option value="53">Bến Tre</a-select-option>
-              <a-select-option value="35">Bình Định</a-select-option>
-              <a-select-option value="47">Bình Dương</a-select-option>
-              <a-select-option value="45">Bình Phước</a-select-option>
-              <a-select-option value="39">Bình Thuận</a-select-option>
-              <a-select-option value="63">Cà Mau</a-select-option>
-              <a-select-option value="59">Cần Thơ</a-select-option>
-              <a-select-option value="3">Cao Bằng</a-select-option>
-              <a-select-option value="42">Đắk Lắk</a-select-option>
-              <a-select-option value="43">Đắk Nông</a-select-option>
-              <a-select-option value="7">Điện Biên</a-select-option>
-              <a-select-option value="48">Đồng Nai</a-select-option>
-              <a-select-option value="56">Đồng Tháp</a-select-option>
-              <a-select-option value="41">Gia Lai</a-select-option>
-              <a-select-option value="2">Hà Giang</a-select-option>
-              <a-select-option value="23">Hà Nam</a-select-option>
-              <a-select-option value="28">Hà Tĩnh</a-select-option>
-              <a-select-option value="19">Hải Dương</a-select-option>
-              <a-select-option value="20">Hải Phòng</a-select-option>
-              <a-select-option value="60">Hậu Giang</a-select-option>
-              <a-select-option value="11">Hòa Bình</a-select-option>
-              <a-select-option value="21">Hưng Yên</a-select-option>
-              <a-select-option value="37">Khánh Hòa</a-select-option>
-              <a-select-option value="58">Kiên Giang</a-select-option>
-              <a-select-option value="40">Kon Tum</a-select-option>
-              <a-select-option value="8">Lai Châu</a-select-option>
-              <a-select-option value="44">Lâm Đồng</a-select-option>
-              <a-select-option value="13">Lạng Sơn</a-select-option>
-              <a-select-option value="6">Lào Cai</a-select-option>
-              <a-select-option value="51">Long An</a-select-option>
-              <a-select-option value="24">Nam Định</a-select-option>
-              <a-select-option value="27">Nghệ An</a-select-option>
-              <a-select-option value="25">Ninh Bình</a-select-option>
-              <a-select-option value="38">Ninh Thuận</a-select-option>
-              <a-select-option value="16">Phú Thọ</a-select-option>
-              <a-select-option value="36">Phú Yên</a-select-option>
-              <a-select-option value="29">Quảng Bình</a-select-option>
-              <a-select-option value="33">Quảng Nam</a-select-option>
-              <a-select-option value="34">Quảng Ngãi</a-select-option>
-              <a-select-option value="14">Quảng Ninh</a-select-option>
-              <a-select-option value="30">Quảng Trị</a-select-option>
-              <a-select-option value="61">Sóc Trăng</a-select-option>
-              <a-select-option value="9">Sơn La</a-select-option>
-              <a-select-option value="46">Tây Ninh</a-select-option>
-              <a-select-option value="22">Thái Bình</a-select-option>
-              <a-select-option value="12">Thái Nguyên</a-select-option>
-              <a-select-option value="26">Thanh Hóa</a-select-option>
-              <a-select-option value="31">Thừa Thiên Huế</a-select-option>
-              <a-select-option value="52">Tiền Giang</a-select-option>
-              <a-select-option value="54">Trà Vinh</a-select-option>
-              <a-select-option value="5">Tuyên Quang</a-select-option>
-              <a-select-option value="55">Vĩnh Long</a-select-option>
-              <a-select-option value="17">Vĩnh Phúc</a-select-option>
-              <a-select-option value="10">Yên Bái</a-select-option>
+              <a-select-option value="Hồ Chí Minh">Hồ Chí Minh</a-select-option>
+              <a-select-option value="Hà Nội">Hà Nội</a-select-option>
+              <a-select-option value="Đà Nẵng">Đà Nẵng</a-select-option>
+              <a-select-option value="An Giang">An Giang</a-select-option>
+              <a-select-option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</a-select-option>
+              <a-select-option value="Bắc Giang">Bắc Giang</a-select-option>
+              <a-select-option value="Bắc Kạn">Bắc Kạn</a-select-option>
+              <a-select-option value="Bạc Liêu">Bạc Liêu</a-select-option>
+              <a-select-option value="Bắc Ninh">Bắc Ninh</a-select-option>
+              <a-select-option value="Bến Tre">Bến Tre</a-select-option>
+              <a-select-option value="Bình Định">Bình Định</a-select-option>
+              <a-select-option value="Bình Dương">Bình Dương</a-select-option>
+              <a-select-option value="Bình Phước">Bình Phước</a-select-option>
+              <a-select-option value="Bình Thuận">Bình Thuận</a-select-option>
+              <a-select-option value="Cà Mau">Cà Mau</a-select-option>
+              <a-select-option value="Cần Thơ">Cần Thơ</a-select-option>
+              <a-select-option value="Cao Bằng">Cao Bằng</a-select-option>
+              <a-select-option value="Đắk Lắk">Đắk Lắk</a-select-option>
+              <a-select-option value="Đắk Nông">Đắk Nông</a-select-option>
+              <a-select-option value="Điện Biên">Điện Biên</a-select-option>
+              <a-select-option value="Đồng Nai">Đồng Nai</a-select-option>
+              <a-select-option value="Đồng Tháp">Đồng Tháp</a-select-option>
+              <a-select-option value="Gia Lai">Gia Lai</a-select-option>
+              <a-select-option value="Hà Giang">Hà Giang</a-select-option>
+              <a-select-option value="Hà Nam">Hà Nam</a-select-option>
+              <a-select-option value="Hà Tĩnh">Hà Tĩnh</a-select-option>
+              <a-select-option value="Hải Dương">Hải Dương</a-select-option>
+              <a-select-option value="Hải Phòng">Hải Phòng</a-select-option>
+              <a-select-option value="Hậu Giang">Hậu Giang</a-select-option>
+              <a-select-option value="Hòa Bình">Hòa Bình</a-select-option>
+              <a-select-option value="Hưng Yên">Hưng Yên</a-select-option>
+              <a-select-option value="Khánh Hòa">Khánh Hòa</a-select-option>
+              <a-select-option value="Kiên Giang">Kiên Giang</a-select-option>
+              <a-select-option value="Kon Tum">Kon Tum</a-select-option>
+              <a-select-option value="Lai Châu">Lai Châu</a-select-option>
+              <a-select-option value="Lâm Đồng">Lâm Đồng</a-select-option>
+              <a-select-option value="Lạng Sơn">Lạng Sơn</a-select-option>
+              <a-select-option value="Lào Cai">Lào Cai</a-select-option>
+              <a-select-option value="Long An">Long An</a-select-option>
+              <a-select-option value="Nam Định">Nam Định</a-select-option>
+              <a-select-option value="Nghệ An">Nghệ An</a-select-option>
+              <a-select-option value="Ninh Bình">Ninh Bình</a-select-option>
+              <a-select-option value="Ninh Thuận">Ninh Thuận</a-select-option>
+              <a-select-option value="Phú Thọ">Phú Thọ</a-select-option>
+              <a-select-option value="Phú Yên">Phú Yên</a-select-option>
+              <a-select-option value="Quảng Bình">Quảng Bình</a-select-option>
+              <a-select-option value="Quảng Nam">Quảng Nam</a-select-option>
+              <a-select-option value="Quảng Ngãi">Quảng Ngãi</a-select-option>
+              <a-select-option value="Quảng Ninh">Quảng Ninh</a-select-option>
+              <a-select-option value="Quảng Trị">Quảng Trị</a-select-option>
+              <a-select-option value="Sóc Trăng">Sóc Trăng</a-select-option>
+              <a-select-option value="Sơn La">Sơn La</a-select-option>
+              <a-select-option value="Tây Ninh">Tây Ninh</a-select-option>
+              <a-select-option value="Thái Bình">Thái Bình</a-select-option>
+              <a-select-option value="Thái Nguyên">Thái Nguyên</a-select-option>
+              <a-select-option value="Thanh Hóa">Thanh Hóa</a-select-option>
+              <a-select-option value="Thừa Thiên Huế">Thừa Thiên Huế</a-select-option>
+              <a-select-option value="Tiền Giang">Tiền Giang</a-select-option>
+              <a-select-option value="Trà Vinh">Trà Vinh</a-select-option>
+              <a-select-option value="Tuyên Quang">Tuyên Quang</a-select-option>
+              <a-select-option value="Vĩnh Long">Vĩnh Long</a-select-option>
+              <a-select-option value="Vĩnh Phúc">Vĩnh Phúc</a-select-option>
+              <a-select-option value="Yên Bái">Yên Bái</a-select-option>
             </a-select>
-            <a-select v-model="district" default-value="Chọn quận / huyện" id="customer_shipping_district" name="customer_shipping_district" style="width: 50%">
-              <a-select-option data-code="null" value="null" selected="">Chọn quận / huyện</a-select-option>
-              <a-select-option value="582">Thành Phố Long Xuyên</a-select-option>
-              <a-select-option value="583">Thị xã Châu Đốc</a-select-option>
-              <a-select-option value="584">Huyện An Phú</a-select-option>
-              <a-select-option value="585">Thị xã Tân Châu</a-select-option>
-              <a-select-option value="586">Huyện Phú Tân</a-select-option>
-              <a-select-option value="587">Huyện Châu Phú</a-select-option>
-              <a-select-option value="588">Huyện Tịnh Biên</a-select-option>
-              <a-select-option value="589">Huyện Tri Tôn</a-select-option>
-              <a-select-option value="590">Huyện Chợ Mới</a-select-option>
-              <a-select-option value="591">Huyện Châu Thành</a-select-option>
-              <a-select-option value="592">Huyện Thoại Sơn</a-select-option>
+            <a-select default-value="Chọn quận / huyện" @change="handleChangeDistrict" style="width: 50%">
+              <a-select-option value="null">Chọn quận / huyện</a-select-option>
+              <a-select-option value="Thành Phố Long Xuyên">Thành Phố Long Xuyên</a-select-option>
+              <a-select-option value="Thị xã Châu Đốc">Thị xã Châu Đốc</a-select-option>
+              <a-select-option value="Huyện An Phú">Huyện An Phú</a-select-option>
+              <a-select-option value="Thị xã Tân Châu">Thị xã Tân Châu</a-select-option>
+              <a-select-option value="Huyện Phú Tân">Huyện Phú Tân</a-select-option>
+              <a-select-option value="Huyện Châu Phú">Huyện Châu Phú</a-select-option>
+              <a-select-option value="Huyện Tịnh Biên">Huyện Tịnh Biên</a-select-option>
+              <a-select-option value="Huyện Tri Tôn">Huyện Tri Tôn</a-select-option>
+              <a-select-option value="Huyện Chợ Mới">Huyện Chợ Mới</a-select-option>
+              <a-select-option value="Huyện Châu Thành">Huyện Châu Thành</a-select-option>
+              <a-select-option value="Huyện Thoại Sơn">Huyện Thoại Sơn</a-select-option>
             </a-select>
           </div>
           <div style="margin-top: 30px">
-            <AButton style="background-color : #338DBC;color: white;border:1px solid #338DBC;height: 50px;width: 200px" @click="validateForm">Complete the order</AButton>
+            <AButton style="background-color : #338DBC;color: white;border:1px solid #338DBC;height: 50px;width: 200px" @click="createTransaction">Complete the order</AButton>
           </div>
         </div>
       </div>
     </div>
-    <div id="details">
-      <div v-if="loading===false" style="background-color: white;width: 80%;margin-right: auto;margin-left: auto;margin-bottom: 20px;margin-top: 20px">
+    <div id="details" style="padding:56px 66px 0 0;">
+      <div v-if="loading===false" style="background-color: white;width: 100%;margin-right: auto;margin-left: auto;margin-bottom: 20px;margin-top: 20px">
         <a-table :columns="columns" :data-source="dataSource"
                  :scroll="{ x: 'calc(300px + 30%)', y: 300 }">
       <span slot="Image" slot-scope="Image">
@@ -146,6 +144,7 @@
       </div>
       <p style="font-size: 25px;color: green">Total: {{formatMoney(getTotal())}}</p>
     </div>
+  </div>
   </div>
 </template>
 
@@ -195,13 +194,24 @@ export default {
       showFormatPhone:false,
       loading:true,
       columns,
-      dataSource
+      dataSource,
+      currentCustomer:null,
+      currentBill:null,
+      step1:false,
+      step2:false,
+      step3:false
     }
   },
   mounted() {
     this.getProductsInCart()
   },
   methods:{
+    handleChangeCity(value) {
+      this.city = `${value}`
+    },
+    handleChangeDistrict(value) {
+      this.district = `${value}`
+    },
     formatMoney(price){
       let formatter = new Intl.NumberFormat('vi', {
         style: 'currency',
@@ -223,7 +233,11 @@ export default {
         this.dataSource = []
         for (let x of arr){
           axios
-            .get("http://localhost:9889/book-controller/get-book-by-id?bookId="+x[0])
+            .get("http://localhost:9889/book-controller/get-book-by-id", {
+              params: {
+                bookId:x[0]
+              }
+            })
             .then(response => {
               let myData = response.data
               this.dataSource.push({
@@ -273,6 +287,59 @@ export default {
       if (this.phoneNumber.match(phoneno)){
         this.showFormatPhone = false
       }
+    },
+    createTransaction(){
+      this.validateForm()
+      if(this.showEmptyPhone == false && this.showFormatPhone == false){
+
+        // tao moi khach hang
+        axios.post("http://localhost:9889/customer-controller/insert-customer", {
+          address: this.address,
+          city: this.city,
+          district: this.district,
+          email: this.email,
+          name: this.name,
+          phoneNumber: this.phoneNumber
+        })
+          .then(response => {
+            this.currentCustomer = response.data
+            console.log(this.currentCustomer)
+          })
+          .catch(e => {
+            this.errors.push(e)
+          }).finally(() => {
+          console.log("Start Step 2")
+          axios.post("http://localhost:9889/bill-controller/insert-bill", {
+            customerId: this.currentCustomer.id,
+            status: 1
+          })
+            .then(response => {
+              this.currentBill = response.data
+              console.log(this.currentBill)
+            })
+            .catch(e => {
+              this.errors.push(e)
+            }).finally(() => {
+            console.log("Start Step 3")
+            let arr = this.convertStringToArray()
+            arr.forEach(el =>{
+              axios.post("http://localhost:9889/detail-bill-controller/insert-detail-bill", {
+                amount: el[1],
+                billId: this.currentBill.billId,
+                isbn: el[0]
+              })
+                .then(response => {
+                  console.log(response.data)
+                })
+                .catch(e => {
+                  this.errors.push(e)
+                }).finally(() => {
+                localStorage.clear()
+              })
+            })
+          })
+        })
+      }
     }
   }
 }
@@ -283,8 +350,10 @@ export default {
   display: flex;
   justify-content: center;
   width: 85%;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 100px;
 }
 #wrapper-checkout > *{
   width: 50%;
