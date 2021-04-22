@@ -20,6 +20,41 @@
       <a-icon type="shopping-cart" style="font-size: 30px;opacity: 0.5" @click="redirectCart"/>
       <p style="font-size: 10px">Cart</p>
     </div>
+    <div class="down-menu" style="margin-left: 30px">
+      <a-dropdown v-if="checkAccount() == false">
+        <a-menu slot="overlay" >
+          <a-menu-item key="1" @click="redirectLogin">
+            <img src="@/assets/s1.png">
+            <span>Login</span>
+          </a-menu-item>
+          <a-menu-item key="2" @click="redirectLogin">
+            <img src="@/assets/s5.png">
+            <span>Sign up</span>
+          </a-menu-item>
+        </a-menu>
+        <div style="margin-top: 20px;cursor: pointer">
+          <a-icon type="user" style="font-size: 30px;opacity: 0.5"></a-icon>
+          <p style="font-size: 10px;">Account</p>
+        </div>
+      </a-dropdown>
+      <a-dropdown v-if="checkAccount() == true">
+        <a-menu slot="overlay" >
+          <a-menu-item key="1" @click="redirectUserInfo">
+            <img src="@/assets/s1.png">
+            <span>{{getUsername()}}</span>
+          </a-menu-item>
+          <a-menu-item key="2" @click="logout">
+            <img src="@/assets/s5.png">
+            <span>Logout</span>
+          </a-menu-item>
+        </a-menu>
+        <div style="margin-top: 20px;cursor: pointer">
+          <a-icon type="user" style="font-size: 30px;opacity: 0.5"></a-icon>
+          <p style="font-size: 10px;">Account</p>
+        </div>
+      </a-dropdown>
+
+    </div>
   </div>
 </template>
 <script>
@@ -39,6 +74,26 @@ export default {
     },
   },
   methods:{
+    redirectUserInfo(){
+      this.$router.push("/user-info").catch(()=>{})
+    },
+    redirectLogin(){
+      this.$router.push("/login").catch(()=>{})
+    },
+    logout(){
+      localStorage.removeItem("username")
+      this.$router.push('/')
+      this.$router.go(0)
+    },
+    getUsername(){
+      return localStorage.getItem("username")
+    },
+    checkAccount(){
+      if (localStorage.getItem("username") == null){
+        return false
+      }
+      return true
+    },
     onSearch(searchText) {
       let list = []
       axios
@@ -101,6 +156,5 @@ export default {
 #search input[type="button"]:focus{
   outline: none;
 }
-
 
 </style>

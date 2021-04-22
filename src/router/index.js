@@ -8,6 +8,8 @@ import BookDetailsByID from "../components/BookDetailsByID";
 import CheckOuts from "../components/CheckOuts";
 import MainLayouts from "../pages/layouts/MainLayouts";
 import BigCart from "../components/BigCart";
+import Login from "../components/Login";
+import UserInfo from "../components/UserInfo";
 Vue.use(Router)
 
 export default new Router({
@@ -37,5 +39,15 @@ export default new Router({
       name:'bookDetailsById',
       component: BookDetailsByID
     },
+    {
+      path: '/login',
+      name:'login',
+      component: Login
+    },
+    {
+      path:'/user-info',
+      name:"userInfo",
+      component: UserInfo
+    }
   ]
 })

@@ -120,7 +120,7 @@ export default {
     autoFontSize(){
       console.log(this.nameOfBook.split().length);
       if (this.nameOfBook.split(' ').length >= 7){
-        this.displayNameBook = this.nameOfBook.split(' ').slice(0,5).join(" ") +'...';
+        this.displayNameBook = this.nameOfBook.split(' ').slice(0,4).join(" ") +'...';
       }else{
         this.displayNameBook = this.nameOfBook;
       }

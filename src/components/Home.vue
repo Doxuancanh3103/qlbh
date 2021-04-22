@@ -19,6 +19,8 @@ export default {
     MainLayouts,
     MyCarousel,
     ListProductHorizontal
+  },
+  mounted() {
   }
 }
 </script>

@@ -7,15 +7,15 @@
       <div v-if="!isEmpty()">
         <div v-if="loading == false">
           <carousel class="my-carousel" :items = this.numberImageInList autoHeight="true">
-            <Product v-for="i in 10"
-                     :key="listBooks[i].isbn"
-                     :book-id="listBooks[i].isbn"
-                     :image-source="listBooks[i].imageBook"
-                     width="98%"
-                     :name-of-book="listBooks[i].name"
-                     :origin-price="listBooks[i].price"
-                     :origin-percent="listBooks[i].discount">
-            </Product>
+             <Product v-for="i in 8"
+                      :key="listBooks[i].isbn"
+                      :book-id="listBooks[i].isbn"
+                      :image-source="listBooks[i].imageBook"
+                      width="98%"
+                      :name-of-book="listBooks[i].name"
+                      :origin-price="listBooks[i].price"
+                      :origin-percent="listBooks[i].discount">
+             </Product>
           </carousel>
         </div>
         <div v-else>
@@ -54,11 +54,11 @@ export default {
   },
   methods: {
     getListBookByType (type) {
-      console.log("a");
       axios
         .get('http://localhost:9889/book-controller/get-list-book-by-type?type='+type)
         .then(response => {
           this.listBooks = response.data
+          console.log(response.data)
         })
         .catch(error => console.log(error))
         .finally(() => this.loading = false)

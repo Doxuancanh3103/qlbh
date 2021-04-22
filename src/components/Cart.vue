@@ -42,7 +42,7 @@
         </template>
       </a-table>
       <p style="font-size: 25px;color: green">Total: {{formatMoney(getTotal())}}</p>
-      <AButton style="width: 150px;border-radius: 100px;margin-bottom: 10px;border: 1px solid green;color: green;font-size: 20px" @click="pay">Pay</AButton>
+      <AButton style="width: 150px;border-radius: 100px;margin-bottom: 10px;border: 1px solid green;color: green;font-size: 20px" @click="pay" :disabled="!isHaveProduct">Pay</AButton>
     </div>
 </template>
 
@@ -98,12 +98,22 @@ export default {
       dataSource,
       columns,
       loading:true,
+      isHaveProduct:true
     }
+  },
+  watch:{
   },
   mounted() {
     this.getProductsInCart()
   },
   methods:{
+    checkCart(){
+      console.log(this.dataSource.length)
+      if (this.dataSource.length > 0){
+        this.isHaveProduct = true
+      }
+      return false
+    },
     getProductsInCart(){
       let arr = this.convertStringToArray()
       try{

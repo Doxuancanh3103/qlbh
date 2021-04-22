@@ -105,7 +105,7 @@ export default {
   data(){
     return {
       currentBook:null,
-      // filter: {},
+      filter: {},
       amount:1,
       loading:true,
       modal1Visible: false,
@@ -132,7 +132,7 @@ export default {
         .finally(() => this.loading = false)
     },
     minus(){
-      if (this.amount > 1){
+      if (this.amount >= 1){
         this.amount = this.amount - 1;
       }
     },
