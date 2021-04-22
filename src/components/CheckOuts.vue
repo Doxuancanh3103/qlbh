@@ -614,6 +614,7 @@ export default {
             }).finally(() => {
             console.log("Start Step 3")
             let arr = this.convertStringToArray()
+            var count = 0
             arr.forEach(el =>{
               axios.post("http://localhost:9889/detail-bill-controller/insert-detail-bill", {
                 amount: el[1],
@@ -622,13 +623,14 @@ export default {
               })
                 .then(response => {
                   console.log(response.data)
+                  count++
                 })
                 .catch(e => {
                   this.errors.push(e)
                 }).finally(() => {
                 localStorage.removeItem("listProduct")
                 this.statusCreate = true
-                this.openSuccess('success')
+                this.openSuccess()
                 this.$router.push("/")
               })
             })

@@ -102,6 +102,9 @@ export default {
     }
   },
   watch:{
+    watchDataSource(){
+
+    }
   },
   mounted() {
     this.getProductsInCart()
@@ -203,9 +206,20 @@ export default {
       this.dataSource.forEach(item => result+=item.Total)
       return result
     },
+    openError(type) {
+      this.$notification[type]({
+        message: 'Notification Status',
+        description:
+          'Cart is not available',
+      });
+    },
     pay(){
       console.log('12432')
-      this.$router.push({path: '/checkouts'})
+      if (this.dataSource.length > 0){
+        this.$router.push({path: '/checkouts'})
+      }else{
+        this.openError('error')
+      }
     }
   }
 }
