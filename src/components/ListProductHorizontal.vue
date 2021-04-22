@@ -1,6 +1,6 @@
 <template>
   <div id="list-product-horizontal">
-    <div id="title">
+    <div id="title" @click="redirectListBook">
       <h2>{{title }}</h2>
     </div>
     <div id="list-product">
@@ -53,6 +53,12 @@ export default {
     typeBook:String
   },
   methods: {
+    redirectListBook(){
+      let convert = this.title.toLowerCase().split(' ')[0].slice(1)
+      let path = '/list-product/'+this.title.slice(0,1)+convert;
+      console.log(path);
+      this.$router.push(path).catch(() => {});
+    },
     getListBookByType (type) {
       axios
         .get('http://localhost:9889/book-controller/get-list-book-by-type?type='+type)

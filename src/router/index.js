@@ -10,6 +10,9 @@ import MainLayouts from "../pages/layouts/MainLayouts";
 import BigCart from "../components/BigCart";
 import Login from "../components/Login";
 import UserInfo from "../components/UserInfo";
+import TableProduct from "../components/TableProduct";
+import AllProduct from "../components/AllProduct";
+import TopTen from "../components/TopTen";
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +51,21 @@ export default new Router({
       path:'/user-info',
       name:"userInfo",
       component: UserInfo
+    },
+    {
+      path:'/list-product/:typeBook',
+      name:'listProduct',
+      component: TableProduct
+    },
+    {
+      path:'/all-product',
+      name:'allProduct',
+      component: AllProduct
+    },
+    {
+      path:'/top-ten',
+      name:'topTen',
+      component: TopTen
     }
   ]
 })

@@ -21,7 +21,9 @@
                     <tr>
                       <th>Image Book</th>
                       <th>Name of Book</th>
-                      <th>Price</th>
+                      <th>Origin Price</th>
+                      <th>Discount</th>
+                      <th>Discount Price</th>
                       <th>Amount</th>
                     </tr>
                     <tr v-for="item in el">
@@ -45,6 +47,12 @@
                       </td>
                       <td>
                         <p>{{formatMoney(item.price)}}</p>
+                      </td>
+                      <td>
+                        <p>{{item.discount}}%</p>
+                      </td>
+                      <td>
+                        <p>{{formatMoney(item.price-item.price*item.discount/100)}}</p>
                       </td>
                       <td>
                         <p>{{item.amount}}</p>
@@ -96,7 +104,7 @@ export default {
     getTotalPrice(el){
       var total = 0
       el.forEach(e => {
-        total += e.price*e.amount
+        total += (e.price-e.price*e.discount/100)*e.amount
       })
       return total
     },

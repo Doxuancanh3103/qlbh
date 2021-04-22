@@ -3,13 +3,30 @@
     <div class="down-menu">
       <a-dropdown>
         <a-menu slot="overlay" >
+          <a-menu-item key="5" @click="redirectAllProducts">
+            <img src="@/assets/s5.png">
+            <span>All Products</span>
+          </a-menu-item>
           <a-menu-item key="1" @click="redirectHome">
             <img src="@/assets/s1.png">
             <span>Home</span>
           </a-menu-item>
           <a-menu-item key="2" @click="redirectBusinessBook">
-            <img src="@/assets/s5.png">
+            <img src="@/assets/s2.png">
             <span>Business book</span>
+          </a-menu-item>
+          <a-menu-item key="3" @click="redirectListeratureBook">
+            <img src="@/assets/s3.png">
+            <span>Literature book</span>
+          </a-menu-item>
+          <a-menu-item key="4" @click="redirectMathBook">
+            <img src="@/assets/s5.png">
+            <span>Math book</span>
+          </a-menu-item>
+
+          <a-menu-item key="6" @click="redirectTopTenBestSeller">
+            <img src="@/assets/s5.png">
+            <span>Top 10 Best Seller</span>
           </a-menu-item>
         </a-menu>
         <div>
@@ -51,11 +68,24 @@ export default {
     handleMenuClick(e){
       // console.log(e)
     },
+    redirectAllProducts(){
+      this.$router.push('/all-product').catch(()=>{})
+    },
+    redirectMathBook(){
+      this.$router.push('/list-product/Math').catch(()=>{})
+    },
+    redirectListeratureBook(){
+      this.$router.push('/list-product/Literature').catch(()=>{})
+    },
     redirectHome(){
       this.$router.push("/").catch(()=>{});
     },
     redirectBusinessBook(){
+      this.$router.push('/list-product/Business').catch(()=>{})
       console.log("Business Book");
+    },
+    redirectTopTenBestSeller(){
+      this.$router.push('/top-ten').catch(() => {})
     }
   }
 
